@@ -1,11 +1,4 @@
 {
     "title": "Chill Vibes 🌊",
-    "description":"Relax & Unwind",
-    "cover": "cover.jpeg",
-  "songs": [
-    {
-      "title": "Better Day",
-      "file": "Better Day - Penguinmusic.mp3"
-    } 
-  ]
+    "description":"Relax & Unwind"
 }
