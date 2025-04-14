@@ -48,7 +48,7 @@ async function getSongs(folder) {
 
 // Function to fetch the list of playlists
 async function getPlaylists() {
-  return ["Chill-Vibes", "Upbeat & Energetic"]; // manually add your folder names
+  return ["Chill-Vibes", "Upbeat-Energetic"]; // manually add your folder names
 }
 
 
