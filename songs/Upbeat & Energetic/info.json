@@ -1,4 +1,12 @@
 {
     "title": "Upbeat & Energetic⚡",
-    "description":"Sounds of Serenity"
-}
+    "description": "Sounds of Serenity",
+    "cover": "cover.jpeg",
+    "songs": [
+      {
+        "title": "Love You Forever - Ultra Line",
+        "file": "Love You Forever - Ultra Line.mp3"
+      }
+    ]
+  }
+  
