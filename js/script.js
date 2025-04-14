@@ -21,6 +21,7 @@ function secondsToMinutesSeconds(seconds) {
 // Function to fetch songs from a folder
 async function getSongs(folder) {
   currFolder = folder;
+  console.log(`Trying to fetch: /songs/${folder}/info.json`); 
   const response = await fetch(`/songs/${folder}/info.json`);
   const data = await response.json();
   songs = data.songs.map(song => song.file);
