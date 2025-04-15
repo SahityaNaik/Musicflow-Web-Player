@@ -121,8 +121,9 @@ async function main() {
 
   // Load the first playlist dynamically
   if (playlists.length > 0) {
-    await getSongs(playlists[0]);
-    playMusic(songs[0], true);
+currFolder = playlists[0];  
+await getSongs(currFolder);
+playMusic(songs[0], true);
   } else {
     console.error("No playlists found.");
   }
