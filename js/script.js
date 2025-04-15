@@ -61,7 +61,7 @@ const playMusic = (track, pause = false) => {
   }
 
   // Set the correct path for the audio file
-  currentSong.src = `/songs/${currFolder}/${track}`;
+  currentSong.src = `https://sahityanaik.github.io/Musicflow-Web-Player/songs/${currFolder}/${track}`;
 
   if (!pause) {
     currentSong
@@ -99,7 +99,7 @@ async function displayAlbums() {
               stroke-width="1.5" stroke-linejoin="round" />
           </svg>
         </div>
-        <img src="/songs/${folder}/${data.cover}" alt="">
+        <img src="https://sahityanaik.github.io/Musicflow-Web-Player/songs/${folder}/${data.cover}" alt="">
         <h2>${data.title}</h2>
         <p>${data.description}</p>
       </div>`;
