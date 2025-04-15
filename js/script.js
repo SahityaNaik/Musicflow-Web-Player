@@ -63,7 +63,6 @@ const playMusic = (track, pause = false) => {
   // Manually create a new Audio element with type set
   const newAudio = document.createElement("audio");
   newAudio.src = `songs/${currFolder}/${track}`;
-  newAudio.type = "audio/mpeg";  // Explicitly set MIME
 
   // Replace the current audio object
   currentSong.pause();
