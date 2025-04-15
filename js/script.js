@@ -60,9 +60,14 @@ const playMusic = (track, pause = false) => {
     return;
   }
 
-  // Set the correct path for the audio file
-  currentSong.src = `https://sahityanaik.github.io/Musicflow-Web-Player/songs/${currFolder}/${track}`;
-  console.log("Trying to play: ", currentSong.src);
+  // Manually create a new Audio element with type set
+  const newAudio = document.createElement("audio");
+  newAudio.src = `https://sahityanaik.github.io/Musicflow-Web-Player/songs/${currFolder}/${track}`;
+  newAudio.type = "audio/mpeg";  // Explicitly set MIME
+
+  // Replace the current audio object
+  currentSong.pause();
+  currentSong = newAudio;
 
   if (!pause) {
     currentSong
@@ -76,11 +81,17 @@ const playMusic = (track, pause = false) => {
   }
 
   // Update the song info in the playbar
-  document.querySelector(".songinfo").innerHTML = decodeURIComponent(
-    track
-  ).replace(".mp3", "");
+  document.querySelector(".songinfo").innerHTML = decodeURIComponent(track).replace(".mp3", "");
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
+
+  // Set up time update again
+  currentSong.addEventListener("timeupdate", () => {
+    document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(
+      currentSong.currentTime
+    )} / ${secondsToMinutesSeconds(currentSong.duration)}`;
+  });
 };
+
 
 // Function to display albums
 async function displayAlbums() {
