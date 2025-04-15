@@ -22,7 +22,7 @@ function secondsToMinutesSeconds(seconds) {
 async function getSongs(folder) {
   currFolder = folder;
   console.log(`Trying to fetch: /songs/${folder}/info.json`); 
-  const response = await fetch(`/songs/${folder}/info.json`);
+  const response = await fetch(`https://sahityanaik.github.io/Musicflow-Web-Player/songs/${folder}/info.json`);
   const data = await response.json();
   songs = data.songs.map(song => song.file);
 
@@ -87,7 +87,7 @@ async function displayAlbums() {
   const cardContainer = document.querySelector(".cardContainer");
 
   for (let folder of folders) {
-    const response = await fetch(`/songs/${folder}/info.json`);
+    const response = await fetch(`https://sahityanaik.github.io/Musicflow-Web-Player/songs/${folder}/info.json`);
     const data = await response.json();
 
     cardContainer.innerHTML += `
