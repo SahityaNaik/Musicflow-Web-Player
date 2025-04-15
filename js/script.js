@@ -70,6 +70,7 @@ const playMusic = (track, pause = false) => {
   currentSong = newAudio;
 
   if (!pause) {
+   currentSong.src = currentSong.src + '?raw=true';
     currentSong
       .play()
       .then(() => {
