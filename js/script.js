@@ -62,6 +62,7 @@ const playMusic = (track, pause = false) => {
 
   // Set the correct path for the audio file
   currentSong.src = `https://sahityanaik.github.io/Musicflow-Web-Player/songs/${currFolder}/${track}`;
+  console.log("Trying to play: ", currentSong.src);
 
   if (!pause) {
     currentSong
