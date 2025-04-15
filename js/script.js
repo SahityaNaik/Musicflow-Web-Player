@@ -22,7 +22,7 @@ function secondsToMinutesSeconds(seconds) {
 async function getSongs(folder) {
   currFolder = folder;
   console.log(`Trying to fetch: /songs/${folder}/info.json`); 
-  const response = await fetch(`https://sahityanaik.github.io/Musicflow-Web-Player/songs/${folder}/info.json`);
+  const response = await fetch(`songs/${folder}/info.json`);
   const data = await response.json();
   songs = data.songs.map(song => song.file);
 
@@ -62,7 +62,7 @@ const playMusic = (track, pause = false) => {
 
   // Manually create a new Audio element with type set
   const newAudio = document.createElement("audio");
-  newAudio.src = `https://sahityanaik.github.io/Musicflow-Web-Player/songs/${currFolder}/${track}`;
+  newAudio.src = `songs/${currFolder}/${track}`;
   newAudio.type = "audio/mpeg";  // Explicitly set MIME
 
   // Replace the current audio object
@@ -100,7 +100,7 @@ async function displayAlbums() {
   const cardContainer = document.querySelector(".cardContainer");
 
   for (let folder of folders) {
-    const response = await fetch(`https://sahityanaik.github.io/Musicflow-Web-Player/songs/${folder}/info.json`);
+    const response = await fetch(`songs/${folder}/info.json`);
     const data = await response.json();
 
     cardContainer.innerHTML += `
@@ -112,7 +112,7 @@ async function displayAlbums() {
               stroke-width="1.5" stroke-linejoin="round" />
           </svg>
         </div>
-        <img src="https://sahityanaik.github.io/Musicflow-Web-Player/songs/${folder}/${data.cover}" alt="">
+        <img src="songs/${folder}/${data.cover}" alt="">
         <h2>${data.title}</h2>
         <p>${data.description}</p>
       </div>`;
