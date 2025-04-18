@@ -60,15 +60,14 @@ const playMusic = (track, pause = false) => {
     return;
   }
 
-  // Manually create a new Audio element with type set
   const newAudio = document.createElement("audio");
- console.log("Trying to play:", `/songs/${currFolder}/${track}`);
   newAudio.src = `songs/${currFolder}/${track}`;
 
-  // Replace the current audio object
+  // Replace current song and reset controls
   currentSong.pause();
   currentSong = newAudio;
 
+  // Update play/pause button
   if (!pause) {
     currentSong
       .play()
@@ -80,17 +79,37 @@ const playMusic = (track, pause = false) => {
       });
   }
 
-  // Update the song info in the playbar
   document.querySelector(".songinfo").innerHTML = decodeURIComponent(track).replace(".mp3", "");
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 
-  // Set up time update again
+  // ⚠️ Reattach timeupdate listener for playbar
   currentSong.addEventListener("timeupdate", () => {
     document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(
       currentSong.currentTime
     )} / ${secondsToMinutesSeconds(currentSong.duration)}`;
+
+    // sync with seekbar
+    const seekbar = document.querySelector(".seekbar");
+    seekbar.value = (currentSong.currentTime / currentSong.duration) * 100 || 0;
+  });
+
+  // ⚠️ Reattach seekbar input
+  const seekbar = document.querySelector(".seekbar");
+  seekbar.addEventListener("input", (e) => {
+    currentSong.currentTime = (e.target.value * currentSong.duration) / 100;
+  });
+
+  // ⚠️ Reattach ended listener
+  currentSong.addEventListener("ended", () => {
+    let index = songs.indexOf(track);
+    if (index + 1 < songs.length) {
+      playMusic(songs[index + 1]);
+    } else {
+      playMusic(songs[0]);
+    }
   });
 };
+
 
 
 // Function to display albums
