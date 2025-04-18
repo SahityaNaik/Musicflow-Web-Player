@@ -62,7 +62,7 @@ const playMusic = (track, pause = false) => {
 
   // Manually create a new Audio element with type set
   const newAudio = document.createElement("audio");
-  newAudio.src = `/songs/${currFolder}/${track}`;
+  newAudio.src = `https://cdn.jsdelivr.net/gh/SahityaNaik/Musicflow-Web-Player/songs/Chill-Vibes/Better-Day-Penguinmusic.mp3`;
 
   // Replace the current audio object
   currentSong.pause();
