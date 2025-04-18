@@ -3,13 +3,13 @@
     "description": "Sounds of Serenity",
     "cover": "cover.jpeg",
     "songs": [
-      {
-        "title": "We Made It - Dxyll",
-        "file": "We Made It - Dxyll.mp3"
-      },
-      {
+        {
         "title": "Holiday - Infraction",
         "file": "Holiday - Infraction.mp3"
+      },  
+        {
+        "title": "We Made It - Dxyll",
+        "file": "We Made It - Dxyll.mp3"
       }
     ]
   }
