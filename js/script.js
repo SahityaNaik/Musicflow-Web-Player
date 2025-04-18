@@ -82,24 +82,21 @@ const playMusic = (track, pause = false) => {
   document.querySelector(".songinfo").innerHTML = decodeURIComponent(track).replace(".mp3", "");
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 
-  // ⚠️ Reattach timeupdate listener for playbar
+  // Reattach timeupdate listener for playbar
   currentSong.addEventListener("timeupdate", () => {
     document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(
       currentSong.currentTime
     )} / ${secondsToMinutesSeconds(currentSong.duration)}`;
 
-    // sync with seekbar
     const seekbar = document.querySelector(".seekbar");
     seekbar.value = (currentSong.currentTime / currentSong.duration) * 100 || 0;
   });
 
-  // ⚠️ Reattach seekbar input
   const seekbar = document.querySelector(".seekbar");
   seekbar.addEventListener("input", (e) => {
     currentSong.currentTime = (e.target.value * currentSong.duration) / 100;
   });
 
-  // ⚠️ Reattach ended listener
   currentSong.addEventListener("ended", () => {
     let index = songs.indexOf(track);
     if (index + 1 < songs.length) {
