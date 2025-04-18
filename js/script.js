@@ -211,21 +211,24 @@ playMusic(songs[0], true);
     document.querySelector(".left").style.left = "-120%";
   });
 
-  // Previous button event
-  previous.addEventListener("click", () => {
-    let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0]);
-    if (index - 1 >= 0) {
-      playMusic(songs[index - 1]);
-    }
-  });
+ // Previous button event
+previous.addEventListener("click", () => {
+  let currentFile = decodeURIComponent(currentSong.src.split("/").pop());
+  let index = songs.indexOf(currentFile);
+  if (index > 0) {
+    playMusic(songs[index - 1]);
+  }
+});
 
-  // Next button event
-  next.addEventListener("click", () => {
-    let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0]);
-    if (index + 1 < songs.length) {
-      playMusic(songs[index + 1]);
-    }
-  });
+// Next button event
+next.addEventListener("click", () => {
+  let currentFile = decodeURIComponent(currentSong.src.split("/").pop());
+  let index = songs.indexOf(currentFile);
+  if (index + 1 < songs.length) {
+    playMusic(songs[index + 1]);
+  }
+});
+
 
   // Volume control event
   document.querySelector(".range input").addEventListener("input", (e) => {
