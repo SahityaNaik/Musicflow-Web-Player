@@ -62,7 +62,7 @@ const playMusic = (track, pause = false) => {
 
   // Manually create a new Audio element with type set
   const newAudio = document.createElement("audio");
-  newAudio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+  newAudio.src = "https://pixabay.com/music/beats-better-day-186374/";
 ;
 
   // Replace the current audio object
