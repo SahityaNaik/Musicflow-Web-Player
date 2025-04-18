@@ -21,7 +21,7 @@ function secondsToMinutesSeconds(seconds) {
 // Function to fetch songs from a folder
 async function getSongs(folder) {
   currFolder = folder;
-  let response = await fetch(`/${folder}/`);
+  let response = await fetch(`songs/${folder}/`);
   let text = await response.text();
   let div = document.createElement("div");
   div.innerHTML = text;
@@ -30,7 +30,7 @@ async function getSongs(folder) {
 
   for (let anchor of anchors) {
     if (anchor.href.endsWith(".mp3")) {
-      songs.push(anchor.href.split(`/${folder}/`)[1]);
+      songs.push(anchor.href.split(`songs/${folder}/`)[1]);
     }
   }
 
@@ -91,7 +91,7 @@ const playMusic = (track, pause = false) => {
   }
 
   // Set the correct path for the audio file
-  currentSong.src = `/${currFolder}/${track}`;
+  currentSong.src = `songs/${currFolder}/${track}`;
 
   if (!pause) {
     currentSong
