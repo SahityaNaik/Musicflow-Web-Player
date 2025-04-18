@@ -1,4 +1,4 @@
- console.log("Let's write JavaScript");
+  console.log("Let's write JavaScript");
  
 // Global variables
 let currentSong = new Audio();
@@ -24,10 +24,8 @@ async function getSongs(folder) {
   console.log(`Trying to fetch: /songs/${folder}/info.json`); 
   const response = await fetch(`songs/${folder}/info.json`);
   const data = await response.json();
-  songs = data.songs.map(song => song.file);}
-  }
+  songs = data.songs.map(song => song.file);
 
-  // Show all songs in the playlist
   let songUL = document.querySelector(".songList ul");
   songUL.innerHTML = data.songs.map((song) => {
     return `
@@ -41,7 +39,6 @@ async function getSongs(folder) {
       </li>`;
   }).join("");
 
-  // Attach event listeners to each song
   Array.from(songUL.getElementsByTagName("li")).forEach((li, index) => {
     li.addEventListener("click", () => {
       playMusic(data.songs[index].file);
@@ -49,10 +46,10 @@ async function getSongs(folder) {
   });
 }
 
- 
+
 // Function to fetch the list of playlists
 async function getPlaylists() {
-  return ["Chill-Vibes", "Upbeat-Energetic"];  
+  return ["Chill-Vibes", "Upbeat-Energetic"]; // manually add your folder names
 }
 
 
@@ -63,8 +60,14 @@ const playMusic = (track, pause = false) => {
     return;
   }
 
-  // Set the correct path for the audio file
-  currentSong.src = `songs/${currFolder}/${track}`;
+  // Manually create a new Audio element with type set
+  const newAudio = document.createElement("audio");
+ console.log("Trying to play:", `/songs/${currFolder}/${track}`);
+  newAudio.src = `songs/${currFolder}/${track}`;
+
+  // Replace the current audio object
+  currentSong.pause();
+  currentSong = newAudio;
 
   if (!pause) {
     currentSong
@@ -78,11 +81,17 @@ const playMusic = (track, pause = false) => {
   }
 
   // Update the song info in the playbar
-  document.querySelector(".songinfo").innerHTML = decodeURIComponent(
-    track
-  ).replace(".mp3", "");
+  document.querySelector(".songinfo").innerHTML = decodeURIComponent(track).replace(".mp3", "");
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
+
+  // Set up time update again
+  currentSong.addEventListener("timeupdate", () => {
+    document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(
+      currentSong.currentTime
+    )} / ${secondsToMinutesSeconds(currentSong.duration)}`;
+  });
 };
+
 
 // Function to display albums
 async function displayAlbums() {
@@ -93,29 +102,29 @@ async function displayAlbums() {
     const response = await fetch(`songs/${folder}/info.json`);
     const data = await response.json();
 
-      cardContainer.innerHTML += `
-        <div data-folder="${folder}" class="card">
-          <div class="play">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5" stroke-linejoin="round" />
-            </svg>
-          </div>
-          <img src="/songs/${folder}/cover.jpeg" alt="">
-          <h2>${data.title}</h2>
-          <p>${data.description}</p>
+    cardContainer.innerHTML += `
+      <div data-folder="${folder}" class="card">
+        <div class="play">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000"
+              stroke-width="1.5" stroke-linejoin="round" />
+          </svg>
         </div>
-      `;
-    }
+        <img src="songs/${folder}/${data.cover}" alt="">
+        <h2>${data.title}</h2>
+        <p>${data.description}</p>
+      </div>`;
   }
 
-  // Attach event listeners to cards
-  Array.from(document.getElementsByClassName("card")).forEach((card) => {
+  document.querySelectorAll(".card").forEach((card) => {
     card.addEventListener("click", async () => {
-      songs = await getSongs(`songs/${card.dataset.folder}`);
+      await getSongs(card.dataset.folder);
       playMusic(songs[0]);
     });
   });
 }
+
 
 // Main function to initialize the player
 async function main() {
@@ -124,8 +133,9 @@ async function main() {
 
   // Load the first playlist dynamically
   if (playlists.length > 0) {
-    await getSongs(`songs/${playlists[0]}`);
-    playMusic(songs[0], true);
+currFolder = playlists[0];  
+await getSongs(currFolder);
+playMusic(songs[0], true);
   } else {
     console.error("No playlists found.");
   }
