@@ -6,7 +6,7 @@ A fully functional, lightweight music player web app inspired by Spotify. It all
 ---
 
 ## 🔗 Live Demo
-**[Live Demo](https://sahityanaik.github.io/Musicflow-Web-Player/)**  
+**[Live Demo](https://musicflow-web-player.vercel.app/))**  
 
 ---
 
