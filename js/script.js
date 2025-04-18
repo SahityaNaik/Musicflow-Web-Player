@@ -62,7 +62,7 @@ const playMusic = (track, pause = false) => {
 
   // Manually create a new Audio element with type set
   const newAudio = document.createElement("audio");
-  newAudio.src = "https://pixabay.com/music/beats-better-day-186374/";
+  newAudio.src = "https://cdn.pixabay.com/download/audio/2024/01/17/audio_186374.mp3";
 ;
 
   // Replace the current audio object
